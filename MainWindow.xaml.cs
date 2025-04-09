@@ -34,12 +34,10 @@ namespace ProyectoLFP
 
         private void EditorTexto_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            // Obtener la posición del cursor
             TextPointer caret = EditorTexto.CaretPosition;
             TextRange rango = new TextRange(EditorTexto.Document.ContentStart, caret);
             string textoHastaCursor = rango.Text;
 
-            // Calcular la línea
             int linea = 1;
             int columna = 1;
 
@@ -47,7 +45,7 @@ namespace ProyectoLFP
             {
                 string[] lineas = textoHastaCursor.Split(new[] { '\n' }, StringSplitOptions.None);
                 linea = lineas.Length;
-                columna = lineas[lineas.Length - 1].Length + 1; // +1 para incluir el carácter de nueva línea
+                columna = lineas[lineas.Length - 1].Length + 1;
             }
 
             IndicadorLineaColumna.Content = $"Línea: {linea}, Columna: {columna}";
@@ -120,7 +118,6 @@ namespace ProyectoLFP
         {
             int coincidencias = 0;
 
-            // Limpiar todos los resaltados anteriores
             TextRange textoCompleto = new TextRange(EditorTexto.Document.ContentStart, EditorTexto.Document.ContentEnd);
             textoCompleto.ApplyPropertyValue(TextElement.BackgroundProperty, Brushes.Transparent);
 
@@ -128,16 +125,13 @@ namespace ProyectoLFP
 
             while (inicio != null && inicio.CompareTo(EditorTexto.Document.ContentEnd) < 0)
             {
-                // Buscar el texto dentro del documento
                 TextRange palabraEncontrada = BuscarEnTexto(inicio, EditorTexto.Document.ContentEnd, cadena);
                 if (palabraEncontrada == null)
                     break;
 
-                // Resaltar
                 palabraEncontrada.ApplyPropertyValue(TextElement.BackgroundProperty, Brushes.Yellow);
                 coincidencias++;
 
-                // Continuar desde después de la palabra encontrada
                 inicio = palabraEncontrada.End;
             }
 
@@ -518,13 +512,6 @@ namespace ProyectoLFP
             var ventana = new ReporteTokensWindow(reporteTokens);
             ventana.ShowDialog(); 
             
-            // Abre la ventana y espera a que se cierre
-            //var tabla = "Nombre del Token\tLexema\tLínea\tColumna\n";
-            //foreach (var (Token, Lexema, Linea, Columna) in reporteTokens)
-            //{
-            //    tabla += $"{Token}\t{Lexema}\t{Linea}\t{Columna}\n";
-            //}
-            //MessageBox.Show(tabla, "Reporte de Tokens");
         }
 
         private void AcercaDe_Click(object sender, RoutedEventArgs e)

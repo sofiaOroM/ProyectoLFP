@@ -1,0 +1,64 @@
+﻿<Window x:Class="ProyectoLFP.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProyectoLFP"
+        mc:Ignorable="d"
+        Title="Analizador Léxico" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="519*"/>
+            <ColumnDefinition Width="281*"/>
+        </Grid.ColumnDefinitions>
+        <Menu VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <MenuItem Header="Archivo">
+                <MenuItem Header="Nuevo" Click="Nuevo_Click"/>
+                <MenuItem Header="Abrir" Click="AbrirArchivo_Click"/>
+                <MenuItem Header="Guardar" Click="GuardarArchivo_Click"/>
+                <MenuItem Header="Guardar Como" Click="GuardarComo_Click"/>
+            </MenuItem>
+            <MenuItem Header="Editar">
+                <MenuItem Header="Copiar" Click="Copiar_Click"/>
+                <MenuItem Header="Pegar" Click="Pegar_Click"/>
+                <MenuItem Header="Deshacer" Click="Deshacer_Click"/>
+                <MenuItem Header="Rehacer" Click="Rehacer_Click"/>
+            </MenuItem>
+            <MenuItem Header="Ayuda">
+                <MenuItem Header="Acerca de" Click="AcercaDe_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <RichTextBox x:Name="EditorTexto" Margin="10,146,10,176"
+                     VerticalScrollBarVisibility="Auto"
+                     SelectionChanged="EditorTexto_SelectionChanged" Grid.ColumnSpan="2"/>
+
+        <Label x:Name="IndicadorLineaColumna" Content="Línea: 1, Columna: 1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,0,0,0"/>
+
+        <DataGrid x:Name="TablaErrores" AutoGenerateColumns = "False" Margin = "365,415,14,29" Grid.ColumnSpan="2"
+                Visibility="Collapsed">
+            <DataGrid.Columns >
+                <DataGridTextColumn Header = "Línea" Binding = "{Binding Linea}" Width = "100" />
+                <DataGridTextColumn Header = "Columna" Binding = "{Binding Columna}" Width = "100" />
+                <DataGridTextColumn Header = "Mensaje" Binding = "{Binding Mensaje}" Width = "*" />
+            </DataGrid.Columns >
+        </DataGrid >
+
+        <TextBox x:Name="EntradaBusqueda" Width="200" HorizontalAlignment="Left" Margin="10,465,0,69"/>
+        <Button Name="BotonBuscar" Content="Buscar" Width="80" HorizontalAlignment="Center" Margin="0,465,0,72" Click="Buscar_Click"/>
+        <Label x:Name="EtiquetaCoincidencias" Content="No. Repeticiones: 0" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="176,0,0,-2"/>
+
+        <Button Content="Analizar" Width="80" HorizontalAlignment="Left" Margin="13,413,0,124" Click="AnalizarTexto_Click" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.679"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <Label Content="Analizador Léxico" HorizontalAlignment="Left" Margin="249,51,0,0" VerticalAlignment="Top" Width="302" Background="Transparent" Foreground="#FFF3F613" FontFamily="Showcard Gothic" Height="55" FontSize="30" Grid.ColumnSpan="2"/>
+        <Label Content="Ingrese su texto o cargue su archivo desde la pestaña &quot;Archivo&quot;" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Width="454"/>
+    </Grid>
+</Window>

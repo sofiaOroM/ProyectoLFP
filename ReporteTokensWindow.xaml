@@ -1,0 +1,37 @@
+﻿<Window x:Class="ProyectoLFP.ReporteTokensWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProyectoLFP"
+        mc:Ignorable="d"
+        Title="Reporte de Tokens" Height="450" Width="800">
+    <Grid Background="#F7F9FA">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <Label Content="Buscar:" VerticalAlignment="Center" FontWeight="Bold"/>
+            <TextBox x:Name="txtBuscar" Width="300" Margin="5,0,0,0" TextChanged="txtBuscar_TextChanged"/>
+            <TextBlock x:Name="txtCoincidencias" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <Button Content="Exportar Reporte" Click="BtnExportar_Click"/>
+        </StackPanel>
+        
+        <DataGrid x:Name="dataGridTokens" 
+                  Grid.Row="1"
+                  AutoGenerateColumns="False" 
+                  HeadersVisibility="Column"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nombre del Token" Binding="{Binding Token}" Width="*"/>
+                <DataGridTextColumn Header="Lexema" Binding="{Binding Lexema}" Width="*"/>
+                <DataGridTextColumn Header="Línea" Binding="{Binding Linea}" Width="Auto"/>
+                <DataGridTextColumn Header="Columna" Binding="{Binding Columna}" Width="Auto"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
